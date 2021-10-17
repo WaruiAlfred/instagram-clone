@@ -1,0 +1,53 @@
+{%extends 'base.html'%} {% load static %} {% load bootstrap5 %}
+
+{% block content %}
+<div class="container pt-3">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div style="background-color: white;padding:20px"class="col-md-8 m-3">
+      <!--search form-->
+      <form action="{% url 'search_results' %}" method="GET">
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="text" name="username" class="form-control" placeholder="username">
+          <button type="submit" class="btn btn-outline-success mt-2">Search user</button>
+        </div>
+      </form>
+
+      {% if users %}
+        <div class="row">
+          <div class="col-md-8">
+            <h3>Found  users matching the name {{message}}</h3>
+            <!--<p><strong>{{users.username}}</strong></p>-->
+            <img class="rounded-circle " src="{{users.profile.profile_photo.url}}" width="300px" height="300px">  
+            <br>
+          </div>
+          <div class="col-md-4" style="margin-top:80px;">
+            <h1>{{current_user}}</h1>
+            <form action="{% url 'follow' %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="user" value="{{current_user}}" readonly>
+              <input type="hidden" name="follower" value="{{user.username}}" readonly>
+              
+              {% if follow_button_value == 'follow' %}
+                <input type="hidden" name="value" value="follow" readonly>
+                <button type="submit" class="btn btn-outline-success">Follow</button>
+              {% else %}
+                <input type="hidden" name="value" value="unfollow" readonly>
+                <button type="submit" class="btn btn-outline-success">Unfollow</button>
+              {% endif %}
+              
+            </form>
+            <ul>
+              <li><span>{{user_followers}}</span>Followers</li>
+              <li><span>{{user_following}}</span>Following</li>
+            </ul>
+          </div> 
+      {% else %}
+        <p> Did not find a user with that username </p>
+      {% endif %}
+    </div>   
+    <div class="col-md-2"></div>
+  </div>
+</div>
+{% endblock %}
