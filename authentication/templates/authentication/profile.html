@@ -1,0 +1,59 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% load bootstrap5 %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card p-3">
+          
+          <img class="rounded-circle " src="{{user.profile.profile_photo.url}}">
+        
+          <h1>{{user.username}}</h1>
+          <h1>{{user.email}}</h1>
+          <br>
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+              <legend class="mb-4 text-center"><b>Profile info</b></legend>
+              {{ u_form|crispy }}
+              {{ p_form|crispy }}
+            </fieldset>
+            <div class="form-group mt-2">
+            <button class="btn btn-outline-info" type="submit">Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="d-flex flex-row">
+          {% for post in posts %}
+            <div class=" m-2">
+              <div class="card" style="width:400px;">
+                <div class="row">
+                  {% if post.image %}
+                  <img src="{{post.image.url}}" class="img-responsive" alt="Image" width="100px" height="300px">
+                  {% endif %}
+                </div>
+
+                <div class="row">
+                  <h1 class="text-center">{{post.image_name}}</h1>
+                </div>
+
+                <div class="row">
+                  <h2 class="text-center">{{post.image_caption}}</h2>
+                </div>
+
+                <div class="row">
+                  <p>Posted {{post.date_added|timesince}} ago by {{post.user.username}}</p>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
