@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+/*navbar*/
+.navbar-brand{
+  font-family: 'Lobster', cursive;
+  font-size: 30px;
+  margin-left: 20px;
+}
+
+/*homepage*/
+body{
+  background-color: rgb(217, 220, 223);
+}
+.display-flex{
+  flex-wrap: wrap;
+}
+
+/*profile*/
+.profile-images{
+  flex-wrap: wrap;
+}
+
+/*register*/
+.account,
+.login-header{
+  font-family: 'Lobster', cursive;
+  font-size: 30px;
+}
+
+/*login*/
+.login-row{
+  padding-left: 15%;
+}
+.login-image{
+  background: url("/static/images/login.png")no-repeat 0px 0px;
+  background-size: cover;
+  background-position: center center;
+}
+.login-card{
+  height: 550px;
+  width: 400px;
+}
