@@ -5,6 +5,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- add icon link -->
+    <link rel = "icon" href = "{% static 'images/ig_logo.png' %}" type = "image/icon">
 
     {% if title %}
       <title>Instagram - {{title}} </title>
@@ -14,12 +16,62 @@
 
     {% block styles %}
       {% bootstrap_css %}
-      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
       <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     {% endblock styles %}
     
   </head>
   <body>
-    <h1>Instagram</h1>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Instagram</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'app_home' %}">Home </a>
+          </li>
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'search_results' %}">Search users</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    <!--Flash messages-->
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{message.tags}}">
+          {{message}}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    {% block content %}{% endblock content %}
+
+    {% block scripts %}
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      {% bootstrap_javascript %}
+    {% endblock scripts %}
+
   </body>
 </html>

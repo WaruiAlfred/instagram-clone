@@ -1,0 +1,50 @@
+{% extends 'base.html' %} 
+{% load bootstrap5 %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <h1 class="text-center">It's more than just posting</h1>
+
+    </div>
+    <div class="row">
+      <div class="d-flex flex-row display-flex">
+        {% for post in posts %}
+          <div class=" m-2">
+            <div class="card p-2" style="width:355px;">
+              <div class="row">
+                {% if post.image %}
+                <img src="{{post.image.url}}" class="img-responsive" alt="Image" width="100px" height="300px">
+                {% endif %}
+              </div>
+
+              <div class="row">
+                <h1 class="text-center">{{post.image_name}}</h1>
+              </div>
+
+              <div class="row">
+                <h2 class="text-center">{{post.image_caption}}</h2>
+              </div>
+
+              <div class="row">
+                <p>Posted {{post.date_added|timesince}} ago by {{post.user.username}}</p>
+              </div>
+
+              <div class="row ml-3">
+                <p class="ml-2">
+                <a href="{% url 'likeImage' post.id %}"><i class="far fa-heart"></i></a>
+                <a style="text-decoration:none;"href="/comment/{{post.id}}"><i class="far fa-comment ml-2"></i></a>  
+                </p>
+                <a href="{% url 'comment' post.id %}">
+                  <p class="fade-item">{{post.likes }} Likes <br>View All {{post.comments }} Comments</p>
+                  <p class="">{{ post.image_caption|slice:":20" }}<small><span class="text-muted">...ReadMore</span></small> </p>
+                </a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}
