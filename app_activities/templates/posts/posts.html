@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+
+{% block content %}
+
+  <div class="container">
+    <div class="d-flex flex-row">
+      {% for post in posts %}
+        <div class=" m-2">
+          <div class="card" style="width:400px;">
+            <div class="row">
+              {% if post.image %}
+              <img src="{{post.image.url}}" class="img-responsive" alt="Image" width="100px" height="300px">
+              {% endif %}
+            </div>
+
+            <div class="row">
+              <h1 class="text-center">{{post.image_name}}</h1>
+            </div>
+
+            <div class="row">
+              <h2 class="text-center">{{post.image_caption}}</h2>
+            </div>
+
+            <div class="row">
+              <p>Posted {{post.date_added|timesince}} ago by {{post.user.username}}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+{% endblock content %}

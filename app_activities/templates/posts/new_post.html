@@ -1,0 +1,15 @@
+{% extends 'base.html' %} 
+{% load bootstrap5 %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <div class="card p-3 m-2">
+      <form action="{% url 'new_image_post' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" class="btn btn-outline-success btn-lg" value="Post">
+    </form>
+    </div>
+  </div>
+{% endblock content %}
