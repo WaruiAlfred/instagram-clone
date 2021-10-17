@@ -1,0 +1,3 @@
+Hello {{name}}
+
+Welcome to Instagram.Here you can upload your photos and do so much more.Jump right in to it.
