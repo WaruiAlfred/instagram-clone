@@ -24,10 +24,6 @@
               </div>
 
               <div class="row">
-                <h2 class="text-center">{{post.image_caption}}</h2>
-              </div>
-
-              <div class="row">
                 <p>Posted {{post.date_added|timesince}} ago by {{post.user.username}}</p>
               </div>
 
@@ -36,7 +32,7 @@
                 <a href="{% url 'likeImage' post.id %}"><i class="far fa-heart"></i></a>
                 <a style="text-decoration:none;"href="/comment/{{post.id}}"><i class="far fa-comment ml-2"></i></a>  
                 </p>
-                <a href="{% url 'comment' post.id %}">
+                <a href="{% url 'comment' post.id %}" style="text-decoration:none;">
                   <p class="fade-item">{{post.likes }} Likes <br>View All {{post.comments }} Comments</p>
                   <p class="">{{ post.image_caption|slice:":20" }}<small><span class="text-muted">...ReadMore</span></small> </p>
                 </a>

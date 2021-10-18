@@ -12,7 +12,7 @@ class Image(models.Model):
   likes = models.IntegerField(default=0)
   comments = models.IntegerField(default=0)
   profile = models.ForeignKey(Profile,on_delete=models.CASCADE,null=True)
-  user = models.ForeignKey(User, on_delete=models.CASCADE,default=1)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
   
   def save_image(self): 
     '''function to save an image and its details'''

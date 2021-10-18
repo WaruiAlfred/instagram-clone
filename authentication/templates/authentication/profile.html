@@ -11,8 +11,8 @@
           
           <img class="rounded-circle " src="{{user.profile.profile_photo.url}}">
         
-          <h1>{{user.username}}</h1>
-          <h1>{{user.email}}</h1>
+          <h5>Username:{{user.username}}</h5>
+          <h5>Email:{{user.email}}</h5>
           <br>
           <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -28,6 +28,7 @@
         </div>
       </div>
       <div class="col-md-8">
+        <h3 class="text-center">My posts</h3>
         <div class="d-flex flex-row profile-images">
           {% for post in posts %}
             <div class=" m-2">
@@ -39,15 +40,15 @@
                 </div>
 
                 <div class="row">
-                  <h1 class="text-center">{{post.image_name}}</h1>
+                  <h3 class="text-center">{{post.image_name}}</h3>
                 </div>
 
                 <div class="row">
-                  <h2 class="text-center">{{post.image_caption}}</h2>
+                  <h4 class="text-center">{{post.image_caption}}</h4>
                 </div>
 
                 <div class="row">
-                  <p>Posted {{post.date_added|timesince}} ago by {{post.user.username}}</p>
+                  <p>Posted {{post.date_added|timesince}}</p>
                 </div>
               </div>
             </div>

@@ -42,24 +42,28 @@ def comment(request,id):
     form = CommentForm(request.POST)
     if form.is_valid():
       comment = form.save(commit=False)
-      comment.image = image.id
+      comment.image = image
       comment.user = current_user
       comment.save()
       
       image.comments = image.comments + 1
       image.save()
       
-      return redirect('comment/', id=image.id)
+      comments = Comment.objects.filter(image=image.id).all()
+     
+      return redirect('/')
   else:
     form = CommentForm()
-    comments = Comment.objects.filter(image=id)
+    comments = Comment.objects.filter(image=image.id).all()
+   
   return render(request,'comments.html',{"form":form,'comments':comments,"image":image,"user":current_user})   
 
 @login_required
 def like_pic(request, id):
-  likes = Like.objects.filter(post=id).first()
+  image = Image.objects.filter(id=id).first()
+  likes = Like.objects.filter(post=image).first()
 
-  if Like.objects.filter(post=id, user=request.user.id).exists():
+  if Like.objects.filter(post=image, user=request.user).exists():
 
     likes.delete()
 
@@ -73,10 +77,10 @@ def like_pic(request, id):
       image.save()
     return redirect('/')
   else:
-    likes = Like(post=id, user=request.user.id)
+    likes = Like(post=image, user=request.user)
     likes.save()
   
     image = Image.objects.get(id=id)
-    image.likes = image.likes + 1
+    image.likes += 1
     image.save()
     return redirect('/')

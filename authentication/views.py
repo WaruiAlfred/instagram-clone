@@ -27,7 +27,7 @@ def register(request):
 @login_required
 def profile(request): 
   posts =   Image.objects.filter(user=request.user).all()
-  print(f'Found posts {posts}')
+ 
   if request.method == 'POST': 
     u_form = UserUpdateForm(request.POST,instance=request.user)
     p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
@@ -52,7 +52,6 @@ def search_results(request):
   if 'username' in request.GET and request.GET["username"]:
     search_term = request.GET.get("username")
     found_user = User.objects.filter(username=search_term).first()
-    print(f'Found user:{found_user}')
     message = f"{search_term}"
     
     current_user = search_term

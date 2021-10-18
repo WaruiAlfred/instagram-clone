@@ -1,12 +1,20 @@
 from django.test import TestCase
 from .models import Profile
+from django.contrib.auth.models import User
 
 #Profile Test class
 class ProfileTestClass(TestCase): 
   
   def setUp(self):
     '''Function that runs before every test'''
-    self.new_profile = Profile(bio = "I love travelling and watching movies.")
+    self.new_user = User(username="anita",email="anita@gmail.com",password="testing321")
+    self.new_user.save()
+    self.new_profile = Profile(user=self.new_user,profile_photo='',bio = "I love travelling and watching movies.")
+    self.new_profile.save_profile()
+  
+  def tearDown(self):
+    User.objects.all().delete()
+    Profile.objects.all().delete()
   
   def test_instance(self): 
     '''Test function to confirm that the object actually exists after creation'''
