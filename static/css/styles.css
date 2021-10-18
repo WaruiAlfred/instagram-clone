@@ -40,3 +40,12 @@ body{
   height: 550px;
   width: 400px;
 }
+@media screen  and (max-width: 700px) {
+  body{
+    overflow-x: hidden;
+  }
+  .login-card{
+    margin: 30px;
+    width: 300px;
+  }
+}
