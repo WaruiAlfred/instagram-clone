@@ -37,6 +37,9 @@
           </li>
           {% if user.is_authenticated %}
             <li class="nav-item">
+              <a class="nav-link" href="{% url 'new_image_post' %}">Upload photo</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{% url 'search_results' %}">Search users</a>
             </li>
              <li class="nav-item">
